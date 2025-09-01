@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>我的第一篇博客</title>
+      <link href="/posts/d95d7e09.html"/>
+      <url>/posts/d95d7e09.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="Hexo-教程"><a href="#Hexo-教程" class="headerlink" title="Hexo 教程"></a>Hexo 教程</h2><p>首先新建一个文件夹用来存放博客的配置文件，在文件夹打开终端或者 git bash，运行以下命令</p><ul><li>安装hexo：</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure><p>如果安装失败就用管理员权限重新打开命令框，再用上面的命令安装<br>完成安装以后初始化配置</p><ul><li>初始化配置：</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init</span><br></pre></td></tr></table></figure><p>如果运行 hexo init 显示要在空文件夹运行的报错，那就随便找个空文件夹运行 hexo init，在出现克隆失败的报错以后，输入 n 不在重试， git 会将 hexo 的初始化文件直接复制到这个空文件夹里面，此时将空文件夹中的初始化文件复制粘贴到博客目录下即可</p><ul><li>为 Hexo 博客安装一个名为 hexo-deployer-git 的插件，用来实现一键部署到 Git 仓库：</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><ul><li>安装好以后就可以在命令框本地启动博客看看效果</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><ul><li>浏览器访问 <a href="http://localhost:4000/">http://localhost:4000/</a> 查看 Hexo 博客网站初始界面</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程，Markdown，Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/posts/4a17b156.html"/>
       <url>/posts/4a17b156.html</url>
