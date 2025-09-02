@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>整数计算器</title>
+      <link href="/posts/92d5d8a2.html"/>
+      <url>/posts/92d5d8a2.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="整数计算器，实现加减乘除"><a href="#整数计算器，实现加减乘除" class="headerlink" title="整数计算器，实现加减乘除"></a>整数计算器，实现加减乘除</h2><p>  <strong>题目描述</strong><br> 请写一个整数计算器，支持加减乘三种运算和括号。<br>数据范围：<br>0≤∣s∣≤100<br>0≤∣s∣≤100，保证计算结果始终在整型范围内<br>要求：空间复杂度： O(n)，时间复杂度 O(n)</p><p><strong>示例1</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：<span class="string">&quot;1+2&quot;</span></span><br><span class="line">返回值：<span class="number">3</span></span><br></pre></td></tr></table></figure><p><strong>示例2</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：<span class="string">&quot;3+2*3*4-1&quot;</span></span><br><span class="line">返回值：<span class="number">26</span></span><br></pre></td></tr></table></figure><p><strong>示例3</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：<span class="string">&quot;(2*(3-4))*5&quot;</span></span><br><span class="line">返回值：-<span class="number">10</span></span><br></pre></td></tr></table></figure><p><em><strong>解题思路</strong></em></p><ul><li>1.创建两个栈，一个栈存放数字，一个栈存放运算符</li><li>2.遍历字符串，如果是数字，则将数字加入数字栈</li><li>3.如果是运算符，则将数字栈的栈顶数字弹出，并与数字栈的栈顶数字弹出，进行运算，将结果压入数字栈</li><li>4.遍历结束后，数字栈的栈顶数字即为结果</li><li>5.时间复杂度O(n)，空间复杂度O(n)</li><li>6.代码实现：</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">solve</span><span class="params">(String s)</span> &#123;</span><br><span class="line">    Deque&lt;Integer&gt; number= <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;();</span><br><span class="line">    Deque&lt;Character&gt; operator = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;();</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 数据结构 </tag>
+            
+            <tag> 运算符优先级 </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hexo安装教程</title>
       <link href="/posts/d95d7e09.html"/>
       <url>/posts/d95d7e09.html</url>
