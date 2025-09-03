@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>自动管理停车场桩位系统</title>
+      <link href="/posts/4ef763b.html"/>
+      <url>/posts/4ef763b.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="自动管理停车场桩位系统"><a href="#自动管理停车场桩位系统" class="headerlink" title="自动管理停车场桩位系统"></a>自动管理停车场桩位系统</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>你重生了，这一世，学会侧方位停车的人就可以统领全世界。因为大部分车主都不会侧方位停车，所以聪明的你发明了 单车道单出入口停车场，如图所示。这样，虽然停在最里面的车的车主要想驶离停车场，就必须要先等到后面的车全部驶离，但至少避免了高难度的侧方位停车，实在是利国利民的伟业！</p><p>聪明的你决定再编写一个自动管理停车场桩位系统，可以处理以下四种信息： </p><ul><li><p>1.<em>有车靠近</em>：此时，传感器会向你的程序发起函数 top() 的调用，你的程序需要返回目前单车道停车场里最靠近出&#x2F;入口位置（即图中停车位编号最大的有车位置）的车辆的车辆编号。</p></li><li><p>2.<em>有车驶入</em>：此时，传感器会自动识别出该车的车辆编号x（1≦x≦109），并向你的程序发起函数push(x) 的调用，你的程序需要记录下这辆车驶入的信息，随后该车将会默认停在该停车场里离出&#x2F;入口位置最远的车位（即图中停车位编号最小的无车位置）。</p></li><li><p>3.<em>有车驶离</em>：此时，传感器不会识别出该车的车辆编号，而是直接向你的程序发起函数 pop() 的调用，你的程序需要先搞明白是哪辆车驶离了，然后记录下这辆车驶离的信息。</p></li><li><p>4.<em>此时，这个无聊的人会向你的传感器提问</em>: “目前停车场内车辆编号最小的车的编号是多少？”，传感器显然不知道答案，所以会直接向你的程序发起函数<br>min() 的调用，你的程序需要计算出这个无聊的人提问的结果，并作为返回值传递给传感器，从而把这个无聊的人打发走。</p></li></ul><p>测试数据保证传感器调用函数的总次数不超过<br>$10^4$ ，虽然如此，建议您尝试让每个函数的调用时间复杂度优化到 O(1)。</p><p><strong>示例1</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line"> [<span class="string">&quot;PSH-1&quot;</span>,<span class="string">&quot;PSH2&quot;</span>,<span class="string">&quot;MIN&quot;</span>,<span class="string">&quot;TOP&quot;</span>,<span class="string">&quot;POP&quot;</span>,<span class="string">&quot;PSH1&quot;</span>,<span class="string">&quot;TOP&quot;</span>,<span class="string">&quot;MIN&quot;</span>]</span><br><span class="line">返回值：</span><br><span class="line">-<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,-<span class="number">1</span></span><br></pre></td></tr></table></figure><p><em>说明</em> </p><ul><li>“PSH-1”表示编号为 -1 的车驶入了停车场，停车场中车辆编号依次为为：-1</li><li>“PSH2”表示编号为 2 的车驶入了停车场，停车场中车辆编号依次为为：2 -1</li><li>“MIN”表示获取此时停车场中最小车辆编号&#x3D;&#x3D;&gt;返回 -1</li><li>“TOP”表示获取车辆编号最外侧车辆的编号&#x3D;&#x3D;&gt;返回 2</li><li>“POP”表示车辆 2 驶离了停车场，停车场中车辆编号依次为为：-1</li><li>“PSH1”表示编号为 1 的车驶入了停车场，停车场中车辆编号依次为为：1 -1</li><li>“TOP”表示获取车辆编号最外侧车辆的编号&#x3D;&#x3D;&gt;返回 1</li><li>“MIN”表示获取此时停车场中最小车辆编号&#x3D;&#x3D;&gt;返回 -1</li></ul><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a><em>解题思路</em></h3><ul><li>1.创建两个栈，一个栈用于存储停车场中的车辆编号，另一个栈用于存储停车场中的车辆编号的最小值。</li><li>2.在入栈操作中，将当前车辆编号入栈，并判断当前车辆编号是否小于栈顶的最小值，如果是则将当前车辆编号入栈。</li><li>3.在出栈操作中，将栈顶元素出栈，并判断栈顶元素是否等于栈顶的最小值，如果是则将栈顶的最小值出栈。</li><li>4.在获取停车场中最小车辆编号操作中，返回停车场中的最小值。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; stack = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; minStack = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();<span class="comment">// 栈顶元素为最小值</span></span><br><span class="line">    <span class="comment">// 栈的入栈操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(<span class="type">int</span> node)</span> &#123;</span><br><span class="line">        stack.push(node);</span><br><span class="line">        <span class="keyword">if</span>(minStack.isEmpty() || minStack.peek()&gt;=node)&#123;</span><br><span class="line">            minStack.push(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 栈的出栈操作</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pop</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">node</span> <span class="operator">=</span> stack.pop();</span><br><span class="line">        <span class="keyword">if</span>(node == minStack.peek())&#123;</span><br><span class="line">            minStack.pop();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获取停车场中车辆编号最外侧车辆的编号</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">top</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> stack.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获取此时停车场中最小车辆编号</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">min</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> minStack.peek();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><em>说明：</em> 用两个栈实现停车场管理，时间复杂度O(1)，空间复杂度O(n)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 数据结构 </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>栈和排序</title>
       <link href="/posts/9fe671ff.html"/>
       <url>/posts/9fe671ff.html</url>
