@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>队列操作</title>
+      <link href="/posts/683c9245.html"/>
+      <url>/posts/683c9245.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="栈和排序"><a href="#栈和排序" class="headerlink" title="栈和排序"></a>栈和排序</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一个空队列，依次执行 n 个操作，操作类型定义如下：</p><ul><li><code>1 x</code>：将整数 x(−10^9≦x≦10^9)<br> 入队；</li><li><code>2</code>：若队列非空，则仅将队头元素出队，否则输出 <code>ERR_CANNOT_POP</code>；</li><li><code>3</code>：查询并输出队首元素，队列为空时输出 <code>ERR_CANNOT_QUERY</code>；</li><li><code>4</code>：输出队列当前元素数量。</li></ul><p><strong>输入描述：</strong><br>第一行包含整数<br>n(1≦n≦10^5)，表示操作总数。<br>接下来 n 行，每行描述一个操作，格式如上所述。</p><p><strong>输出描述：</strong><br>对于每个操作 <code>2</code>、<code>3</code>、<code>4</code>，按执行顺序，每行输出对应的结果。</p><p><strong>示例1</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line"><span class="number">7</span></span><br><span class="line"><span class="number">1</span> <span class="number">10</span></span><br><span class="line"><span class="number">1</span> <span class="number">20</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line">输出：</span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">20</span></span><br></pre></td></tr></table></figure><p><em>说明：</em><br>在样例中：  </p><ul><li>执行 <code>1 10</code> 和 <code>1 20</code> 后队列为<br>[10,20]； </li><li><code>3</code> 输出队首 10； </li><li><code>4</code> 输出队列大小 2； </li><li><code>2</code> 出队并输出 10；队列变为 [20]； </li><li><code>3</code> 输出队首 20； </li><li><code>2</code> 出队并输出 20；此后队列为空。</li></ul><h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a><em>解题思路</em></h2><ul><li>1.问题要求模拟队列的操作，并输出结果。</li><li>2.解决这个问题的关键是使用队列数据结构来模拟队列的操作。</li><li>3.这里使用Java的Deque类来模拟队列。其底层是一个双端队列，可以添加和删除元素。</li><li>4.根据题目要求，使用switch语句来判断操作类型，并执行相应的操作。</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意类名必须为 Main, 不要有任何 package xxx 信息</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">         <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">        Deque&lt;Integer&gt; queue = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">op</span> <span class="operator">=</span> sc.nextInt();</span><br><span class="line">            <span class="keyword">switch</span> (op) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                    queue.offer(sc.nextInt());</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                    <span class="keyword">if</span> (queue.isEmpty()) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;ERR_CANNOT_POP&quot;</span>);</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        queue.poll();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                    <span class="keyword">if</span> (queue.isEmpty()) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;ERR_CANNOT_QUERY&quot;</span>);</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(queue.peekLast());</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                    System.out.println(queue.size());</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><em>总结：</em> 了解队列的基本概念，是先进先出的数据结构，使用Java已有的Deque类实现队列。直接创建队列对象，然后使用offer()方法将元素加入队列，使用poll()方法取出队列的头元素。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 数据结构 </tag>
+            
+            <tag> 队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>验证栈序列</title>
       <link href="/posts/ed77a844.html"/>
       <url>/posts/ed77a844.html</url>
@@ -84,11 +113,11 @@
             
             <tag> 数据结构 </tag>
             
-            <tag> 栈 </tag>
-            
             <tag> 排序 </tag>
             
             <tag> 贪心算法 </tag>
+            
+            <tag> 栈 </tag>
             
         </tags>
       
@@ -115,13 +144,13 @@
             
             <tag> Java </tag>
             
-            <tag> 算法 </tag>
-            
             <tag> 数据结构 </tag>
             
-            <tag> 运算符优先级 </tag>
-            
             <tag> 栈 </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 运算符优先级 </tag>
             
         </tags>
       
