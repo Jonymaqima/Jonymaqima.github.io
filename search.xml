@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>无法吃早餐的学生</title>
+      <link href="/posts/ea71a4f5.html"/>
+      <url>/posts/ea71a4f5.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="无法吃早餐的学生"><a href="#无法吃早餐的学生" class="headerlink" title="无法吃早餐的学生"></a>无法吃早餐的学生</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>定义长度为 n (1≦n≦100) 的序列 students&#x3D;[s1,…,sn]students&#x3D;[s 1​…sn​ ] (si∈{0,1})表示队列中第 i 名学生的偏好，序列 sandwiches&#x3D;[t 1 ,…,t n​ ] (ti∈{0,1}) 表示栈顶至栈底的三明治类型（t1 为栈顶）。</p><p>初始时，队列与栈均包含 n 名学生与 n 个三明治。每步操作如下：</p><ul><li>若 s1&#x3D;t1 ，则该学生取走该三明治并移出队列，三明治出栈；</li><li>否则，将队首学生移至队尾；</li><li>重复上述操作直至所有剩余学生均不满足栈顶三明治偏好。</li></ul><p>你需要补全一个函数求无法拿到三明治的学生人数，接受的参数为：</p><ul><li>整数序列 students，长度为 n；</li><li>整数序列 sandwiches长度为 n。</li></ul><p>函数的返回值为一个正整数，表示无法拿到三明治的学生人数。</p><p><strong>输入描述：</strong><br>第一行包含整数 n，表示学生人数与三明治数量。<br>第二行包含 n 个整数 s1,…,sn (si∈{0,1})，表示学生的偏好。<br>第三行包含 n 个整数 t1,…,tn (ti∈{0,1})，表示三明治的类型。<br><strong>输出描述：</strong><br>输出一个整数，表示无法拿到三明治的学生人数。<br><strong>示例1</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">[<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>],[<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>]</span><br><span class="line">返回值：</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure><p><em>说明：</em><br>在样例中：</p><ul><li>初始时，队列与栈分别为 [1,1,0,1] 和 [1,0,0,1]；</li><li>第 1 步操作后，队列与栈分别为 [1,0,1] 和 [0,0,1]；</li><li>第 2 步操作后，队列与栈分别为 [0,1,1] 和 [0,0,1]；</li><li>第 3 步操作后，队列与栈分别为 [1,1] 和 [0,1]；</li><li>第 4 步操作后，队列与栈分别为 [1,1] 和 [0,1]；</li><li>由于队列中所有学生均不满足栈顶三明治偏好，操作结束，无法拿到三明治的学生人数为 2。</li></ul><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> students int整型一维数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sandwiches int整型一维数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">countStudents</span> <span class="params">(<span class="type">int</span>[] students, <span class="type">int</span>[] sandwiches)</span> &#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        Deque&lt;Integer&gt; studentQueue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> student : students) &#123;</span><br><span class="line">            studentQueue.offer(student);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">unMachCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (index &lt; sandwiches.length ) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!studentQueue.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">if</span> (sandwiches[index] == studentQueue.getFirst()) &#123;</span><br><span class="line">                    index++;</span><br><span class="line">                    studentQueue.poll();</span><br><span class="line">                    unMachCount = <span class="number">0</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    studentQueue.offer(studentQueue.poll());</span><br><span class="line">                    unMachCount++;</span><br><span class="line">                    <span class="keyword">if</span> (unMachCount == studentQueue.size()) &#123;</span><br><span class="line">                      <span class="keyword">return</span> studentQueue.size();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> studentQueue.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><em>总结：</em> 使用Deque模拟队列操作，遍历三明治数组，根据学生偏好进行匹配，统计无法拿到三明治的学生人数。循环终止条件为所有三明治处理完或连续无法匹配的学生数等于队列长度。 </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 数据结构 </tag>
+            
+            <tag> 队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>WSL安装教程</title>
       <link href="/posts/193bbd0.html"/>
       <url>/posts/193bbd0.html</url>
@@ -171,11 +200,11 @@
             
             <tag> 数据结构 </tag>
             
+            <tag> 栈 </tag>
+            
             <tag> 排序 </tag>
             
             <tag> 贪心算法 </tag>
-            
-            <tag> 栈 </tag>
             
         </tags>
       
@@ -202,13 +231,13 @@
             
             <tag> Java </tag>
             
-            <tag> 数据结构 </tag>
-            
-            <tag> 栈 </tag>
-            
             <tag> 算法 </tag>
             
+            <tag> 数据结构 </tag>
+            
             <tag> 运算符优先级 </tag>
+            
+            <tag> 栈 </tag>
             
         </tags>
       
@@ -233,7 +262,9 @@
       
         <tags>
             
-            <tag> Hexo，butterFly </tag>
+            <tag> Hexo </tag>
+            
+            <tag> butterFly </tag>
             
         </tags>
       
