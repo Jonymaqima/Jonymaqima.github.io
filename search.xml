@@ -33,6 +33,35 @@
     
     
     <entry>
+      <title>WSL卸载教程</title>
+      <link href="/posts/6b61732c.html"/>
+      <url>/posts/6b61732c.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="WSL卸载教程"><a href="#WSL卸载教程" class="headerlink" title="WSL卸载教程"></a>WSL卸载教程</h2><h3 id="卸载WSL"><a href="#卸载WSL" class="headerlink" title="卸载WSL"></a>卸载WSL</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><em>介绍</em></h4><p>WSL 是微软为 Windows 打造的 Linux 兼容层，支持原生运行 Linux 程序。目前主要有 2 个版本：</p><ul><li>WSL 1：通过系统转换层，将 Linux 指令翻译成 Windows 能理解的样子。</li><li>WSL 2：直接在一台轻量级（Hyper-V）虚拟机中，运行一个精简版 Linux 内核，性能更强、兼容性更好。</li></ul><p>无论你是开发者、运维人员，还是学生，WSL 都是一个超实用的工具。它能让你直接运行 Linux 下的bash、ssh、grep、awk，甚至是 Docker 工具。但如果你打算转投「真 · Linux」，或者准备重装 WSL，接下来的卸载流程就特别有用啦！<br><em>步骤</em></p><ol><li><p><strong>打开 PowerShell</strong>：按下 <code>Win + X</code>，选择“Windows PowerShell（管理员）”。</p></li><li><p><strong>列出已安装的 WSL 发行版</strong>：在 PowerShell 中输入以下命令，查看当前安装的 WSL 发行版：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--list</span> <span class="literal">--verbose</span></span><br></pre></td></tr></table></figure><p>你会看到类似如下的输出，列出所有已安装的发行版及其状态：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NAME                   STATE           VERSION</span><br><span class="line">Ubuntu                 Stopped         <span class="number">2</span></span><br><span class="line">Debian                 Stopped         <span class="number">2</span></span><br><span class="line">kali<span class="literal">-linux</span>             Stopped         <span class="number">2</span></span><br></pre></td></tr></table></figure></li><li><p><strong>卸载 WSL 发行版</strong>：使用以下命令卸载指定的 WSL 发行版（将 <code>&lt;DistributionName&gt;</code> 替换为实际的发行版名称，如 <code>Ubuntu</code>、<code>Debian</code> 等）：</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--unregister</span> &lt;DistributionName&gt;</span><br></pre></td></tr></table></figure><p> 例如，要卸载 Ubuntu，可以运行：</p> <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--unregister</span> Ubuntu</span><br></pre></td></tr></table></figure></li><li><p><strong>卸载 WSL 功能</strong>：在卸载 WSL 之前，务必要先移除所有已安装的发行版。如果你装了多个，就得一个一个来。</p></li><li><p><strong>关闭 WSL 功能</strong>：卸载完成后，想要完全卸载wsl你需要 按下 <code>Win + R</code>，输入 <code>optionalfeatures.exe</code>，然后按回车。在弹出的“Windows 功能”窗口中，找到并取消勾选“适用于 Linux 的 Windows 子系统”和“虚拟机平台”，然后点击“确定”。系统可能会提示你重启电脑，按照提示操作即可。</p></li><li><p><strong>删除残留文件</strong>：卸载 WSL 发行版后，相关的文件可能仍然保留在系统中。你可以手动删除这些文件，通常位于以下路径：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\&lt;YourUsername&gt;\AppData\Local\Packages\</span><br></pre></td></tr></table></figure><p>在这个目录下，找到以发行版名称开头的文件夹（例如 <code>CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc</code>），然后删除它们。</p></li><li><p><strong>重启电脑</strong>：完成上述步骤后，建议重启电脑以确保所有更改生效。<br><em>注意事项</em></p></li></ol><ul><li>卸载 WSL 发行版会删除所有与该发行版相关的数据和文件，请确保提前备份重要数据。</li><li>如果你打算重新安装 WSL，可以通过 Microsoft Store 重新下载所需的发行版。</li><li>如果你在卸载过程中遇到任何问题，可以参考微软官方文档或寻求社区帮助。</li><li>WSL 2 依赖于 Hyper-V 功能，如果你计划继续使用 WSL，建议保留“虚拟机平台”功能。</li><li>如果你只是想重置某个发行版，可以使用 <code>wsl --unregister &lt;DistributionName&gt;</code> 命令，而不必完全卸载 WSL 功能。</li><li>如果你在卸载过程中遇到任何问题，可以参考微软官方文档或寻求社区帮助。</li></ul><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a><em>总结</em></h4><p>通过以上步骤，你就可以成功卸载 WSL 及其发行版。如果你打<br>算重新安装 WSL，记得先备份重要数据哦！祝你使用愉快！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> WSL </tag>
+            
+            <tag> Windows </tag>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>队列操作</title>
       <link href="/posts/683c9245.html"/>
       <url>/posts/683c9245.html</url>
@@ -142,11 +171,11 @@
             
             <tag> 数据结构 </tag>
             
-            <tag> 栈 </tag>
-            
             <tag> 排序 </tag>
             
             <tag> 贪心算法 </tag>
+            
+            <tag> 栈 </tag>
             
         </tags>
       
@@ -173,13 +202,13 @@
             
             <tag> Java </tag>
             
-            <tag> 算法 </tag>
-            
             <tag> 数据结构 </tag>
             
-            <tag> 运算符优先级 </tag>
-            
             <tag> 栈 </tag>
+            
+            <tag> 算法 </tag>
+            
+            <tag> 运算符优先级 </tag>
             
         </tags>
       
