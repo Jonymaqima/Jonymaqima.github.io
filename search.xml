@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>WSL安装教程</title>
+      <link href="/posts/193bbd0.html"/>
+      <url>/posts/193bbd0.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="WSL安装教程"><a href="#WSL安装教程" class="headerlink" title="WSL安装教程"></a>WSL安装教程</h2><h3 id="安装WSL"><a href="#安装WSL" class="headerlink" title="安装WSL"></a>安装WSL</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><em>介绍</em></h4><p>WSL 是微软为 Windows 打造的 Linux 兼容层，支持原生运行 Linux 程序。目前主要有 2 个版本：</p><ul><li>WSL 1：通过系统转换层，将 Linux 指令翻译成 Windows 能理解的样子。</li><li>WSL 2：直接在一台轻量级（Hyper-V）虚拟机中，运行一个精简版 Linux 内核，性能更强、兼容性更好。</li><li>WSL 2 依赖于 Windows 的 Hyper-V 功能，因此需要确保你的 Windows 版本支持 Hyper-V（Windows 10 专业版、企业版和教育版均支持，家庭版需要手动启用 Hyper-V 功能）。</li><li>WSL 1 和 WSL 2 可以共存，你可以根据需要选择使用哪一个版本的发行版。</li><li>WSL 2 提供了更好的文件系统性能和完全的系统调用兼容性，适合需要运行复杂 Linux 应用的用户。</li><li>WSL 1 启动速度更快，占用资源更少，适合轻量级的开发任务。<br>无论你是开发者、运维人员，还是学生，WSL 都是一个超实用的工具。它能让你直接运行 Linux 下的bash、ssh、grep、awk，甚至是 Docker 工具。</li></ul><h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a><em>步骤</em></h4><ol><li><strong>打开 PowerShell</strong>：按下 <code>Win + X</code>，选择“Windows PowerShell（管理员）”。</li><li><strong>启用 WSL 功能</strong>：在 PowerShell 中输入以下命令，启用 WSL 和虚拟机平台功能：<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /<span class="built_in">enable-feature</span> /featurename:Microsoft<span class="literal">-Windows-Subsystem-Linux</span> /all /norestart</span><br><span class="line">dism.exe /online /<span class="built_in">enable-feature</span> /featurename:VirtualMachinePlatform /all /norestart</span><br></pre></td></tr></table></figure></li><li><strong>设置 WSL 版本</strong>：如果你想使用 WSL 2 作为默认版本，可以运行以下命令：<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--set-default-version</span> <span class="number">2</span></span><br></pre></td></tr></table></figure></li><li><strong>安装 Linux 发行版</strong>：打开 Microsoft Store，搜索并安装你喜欢的 Linux 发行版（如 Ubuntu、Debian、Kali Linux 等）。点击“获取”按钮进行安装。</li><li><strong>初始化发行版</strong>：安装完成后，点击“启动”按钮，首次</li><li>运行时会提示你创建一个新的用户账户和密码。按照提示完成设置。</li><li><strong>更新和升级</strong>：建议在首次运行后，更新和升级你的 Linux 发行版。可以使用以下命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt upgrade -y</span><br></pre></td></tr></table></figure></li><li><strong>安装常用工具</strong>：根据需要安装常用的开发工具和软件包，例如 Git、Node.js、Python 等。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install git nodejs python3 -y</span><br></pre></td></tr></table></figure></li><li><strong>访问 Windows 文件系统</strong>：你可以通过 <code>/mnt/c</code> 访问 Windows 的 C 盘，其他盘符类似，例如 D 盘为 <code>/mnt/d</code>。</li><li><strong>配置 WSL 设置</strong>：你可以通过编辑 <code>~/.wslconfig</code> 文件来配置 WSL 的内存、CPU 核心数等设置。例如：<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[wsl2]</span></span><br><span class="line"><span class="attr">memory</span>=<span class="number">4</span>GB   <span class="comment"># 限制 WSL 2 使用的内存</span></span><br><span class="line"><span class="attr">processors</span>=<span class="number">2</span> <span class="comment"># 限制 WSL 2 使用的 CPU 核心数</span></span><br></pre></td></tr></table></figure></li><li><strong>安装 Windows 终端（可选）</strong>：为了更好的使用体验，建议安装 Windows Terminal，可以从 Microsoft Store 下载。它支持多标签页、主题和自定义配置，非常适合同时管理多个终端会话。</li><li><strong>设置默认发行版（可选）</strong>：如果你安装了多个发行版，可以通过以下命令设置默认启动的发行版：<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--set-default</span> &lt;DistributionName&gt;</span><br></pre></td></tr></table></figure>将 <code>&lt;DistributionName&gt;</code> 替换为你想设置为默认的发行版名称，例如 <code>Ubuntu</code>。<br><em>注意事项</em></li></ol><ul><li>确保你的 Windows 版本是最新的，以获得最佳的 WSL 支持和性能。</li><li>如果你在安装过程中遇到任何问题，可以参考微软官方文档或寻求社区帮助。</li><li>WSL 2 依赖于 Hyper-V 功能，如果你的 Windows 版本不支持 Hyper-V，可以选择使用 WSL 1。</li><li>如果你只是想体验 Linux 环境，可以选择安装 WSL 1，它对系统资源的要求较低。</li><li>WSL 2 提供了更好的性能和兼容性，适合需要运行复杂 Linux 应用的用户。</li><li>如果你在使用过程中遇到任何问题，可以参考微软官方文档或寻求社区帮助。</li></ul><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a><em>总结</em></h4><p>通过以上步骤，你就可以成功安装并配置 WSL。如果你打算深入使用 Linux 环境，建议多了解一些 Linux 的基本命令和工具。祝你使用愉快！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> WSL </tag>
+            
+            <tag> Windows </tag>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>队列操作</title>
       <link href="/posts/683c9245.html"/>
       <url>/posts/683c9245.html</url>
