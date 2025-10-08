@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>队列消数</title>
+      <link href="/posts/3ac2d424.html"/>
+      <url>/posts/3ac2d424.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="队列消数"><a href="#队列消数" class="headerlink" title="队列消数"></a>队列消数</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定正整数序列<br>a&#x3D;(a1,a2,…,an)<br>(1≦ai≦100)及索引<br>k(0≦k&lt;n≦100)，定义初始队列为元素下标序列<br>(1,2,…,n)。<br>重复以下过程直至索引 k 对应元素被移除：∙</p><p>∙取出队首下标 i，耗时 1 秒；<br>若 ai&gt;1a i &gt;1，令 ai←ai−1a i ←a i −1 并将 i 加入队尾；∘<br>∘否则，将其从队列中移除。<br>返回目标元素 a k<br>  被移除时的总耗时。</p><p><strong>输入描述：</strong><br>一个整数序列 a 及索引 k，格式为 [a1,a2,…,an],k。<br><strong>输出描述：</strong><br>输出一个整数，表示目标元素被移除时的总耗时。<br><strong>示例1</strong></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">[<span class="number">1</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">4</span>],<span class="number">2</span></span><br><span class="line">返回值：</span><br><span class="line"><span class="number">13</span></span><br></pre></td></tr></table></figure><p><em>说明：</em><br>在样例中：</p><ul><li>初始队列为 [1,1,4,5,1,4]，索引 k&#x3D;2 对应元素 4；</li><li>第 1 秒，取出队首 1 并移除，队列变为 [1,4,5,1,4]；</li><li>第 2 秒，取出队首 1 并移除，队列变为 [4,5,1,4]；</li><li>第 3 秒，取出队首 4，令其减 1 并加入队尾，队列变为 [5,1,4,3]；</li><li>第 4 秒，取出队首 5，令其减 1并加入队尾，队列变为 [1,4,3,4]；</li><li>第 5 秒，取出队首 1 并移除，队列变为 [4,3,4]；</li><li>第 6 秒，取出队首 4，令其减 1并加入队尾，队列变为 [3,4,3]；</li><li>第 7 秒，取出队首 3，令其减 1并加入队尾，队列变为 [4,3,2]；</li><li>第 8 秒，取出队首 4，令其减 1并加入队尾，队列变为 [3,2,3]；</li><li>第 9 秒，取出队首 3，令其减 1并加入队尾，队列变为 [2,3,2]；</li><li>第 10 秒，取出队首 2，令其减 1并加入队尾，队列变为 [3,2,1]；</li><li>第 11 秒，取出队首 3，令其减 1并加入队尾，队列变为 [2,1,2]；</li><li>第 12 秒，取出队首 2，令其减 1并加入队尾，队列变为 [1,2,1]；</li><li>第 13 秒，取出队首 1 并移除，队列变为 [2,1]，目标元素 4 被移除，过程结束，总耗时 13 秒。</li><li>因此输出 13。</li></ul><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> tickets int整型一维数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> k int整型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">timeRequiredToBuy</span> <span class="params">(<span class="type">int</span>[] tickets, <span class="type">int</span> k)</span> &#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">time</span> <span class="operator">=</span> <span class="number">0</span>;<span class="comment">// 记录时间</span></span><br><span class="line">        Deque&lt;Integer&gt; deque = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; tickets.length; i++) &#123;</span><br><span class="line">            deque.add(i);<span class="comment">// 将下标加入队列</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!deque.isEmpty()) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> deque.poll(); <span class="comment">// 取出队首下标</span></span><br><span class="line">            time++;<span class="comment">// 时间加1</span></span><br><span class="line">            <span class="keyword">if</span> (index == k &amp;&amp; tickets[index] &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> time;<span class="comment">// 如果是目标元素且票数为1，返回时间</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (tickets[index] &gt; <span class="number">1</span>) &#123;</span><br><span class="line">                tickets[index]--;<span class="comment">// 票数减1</span></span><br><span class="line">                deque.add(index); <span class="comment">// 将下标加入队尾</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> time; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><em>总结</em></li></ul><ul><li>1.问题要求模拟队列的操作，并输出结果。</li><li>2.解决这个问题的关键是使用队列数据结构来模拟队列的操作。</li><li>3.这里使用Java的Deque类来模拟队列。其底层是一个双端队列，可以添加和删除元素。这里用deque添加下标来表示队列中的元素。</li><li>4.根据题目要求，使用while循环来不断取出队首元素，并根据票数进行相应的操作，直到目标元素被移除。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据结构与算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 数据结构 </tag>
+            
+            <tag> 队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>无法吃早餐的学生</title>
       <link href="/posts/ea71a4f5.html"/>
       <url>/posts/ea71a4f5.html</url>
@@ -231,9 +260,9 @@
             
             <tag> Java </tag>
             
-            <tag> 算法 </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> 算法 </tag>
             
             <tag> 运算符优先级 </tag>
             
